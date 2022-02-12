@@ -20,6 +20,7 @@ const oauth2Client = new google.auth.OAuth2(
 
 oauth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
 
+//initializing google drive
 const drive = google.drive({
     version: 'v3',
     auth: oauth2Client
@@ -27,6 +28,7 @@ const drive = google.drive({
 
 const filePath = path.join(__dirname, 'adhyan.jpg');
 
+//on uploading the file, generates file ID 
 async function uploadFile() {
     try {
         const response = await drive.files.create({
@@ -46,6 +48,8 @@ async function uploadFile() {
     }
 }
 
+
+//generated file ID (from uploadFile function) creates a URL to be used to display the image
 async function generatePublicUrl() {
     try {
         const fileId = '1OAIpApxvzBUMXstkQw7RHME11vna0srK';
